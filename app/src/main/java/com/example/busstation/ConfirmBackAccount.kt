@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.busstation.data.Driver
-import kotlinx.android.synthetic.main.fragment_bank_account_confirm.view.*
+
 import kotlinx.android.synthetic.main.fragment_confirm_back_account.view.*
 import kotlinx.android.synthetic.main.fragment_confirm_back_account.view.acc_confirm_btn
 import kotlinx.android.synthetic.main.fragment_confirm_back_account.view.acc_password_et

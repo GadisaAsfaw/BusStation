@@ -5,11 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(User::class,Driver::class,BankAccount::class),version = 1)
+@Database(entities = arrayOf(User::class,Driver::class,BankAccount::class,TransportInfo::class),version = 1)
 abstract  class MYDatabase:RoomDatabase() {
     abstract  fun userDao():UserDao
     abstract  fun driverDao():DriverDao
     abstract  fun accountDao():AccountDao
+    abstract  fun transportInfoDao():TransportInfoDao
 
 
     companion object {
