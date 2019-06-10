@@ -22,15 +22,7 @@ class BankAccountConfirm : Fragment() {
 
 
 
-    companion object{
-        fun getInstance(driver:Driver):BankAccountConfirm{
-            val fragment = BankAccountConfirm()
-            val bundle = Bundle()
-            bundle.putSerializable("driver",driver)
-            fragment.arguments = bundle
-            return  fragment
-        }
-    }
+
 
 
 }

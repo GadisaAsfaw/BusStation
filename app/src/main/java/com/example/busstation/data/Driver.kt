@@ -16,4 +16,4 @@ data class Driver(
     @ColumnInfo(name = "car_side_no") val carSideNo:Int,
     @ColumnInfo(name = "seat_no") val seatNo:Int,
     @ColumnInfo(name = "acc_no") val accNo:String //foreign
-):Serializable
+)
