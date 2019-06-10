@@ -3,6 +3,7 @@ package com.example.busstation
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,9 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
+import com.example.busstation.data.TransportInfo
+import com.example.busstation.viewmodel.TranspInfoviewmodel
 import kotlinx.android.synthetic.main.fragment_driver_buy_ticket.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,12 +30,21 @@ class DriverBuyTicket : Fragment() {
     private lateinit var dateValue:String
     private lateinit var timeValue:String
 
+    private lateinit var transpInfoVM: TranspInfoviewmodel
+    private lateinit var listener:OnTransportInfoByBtnClicked
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if(context is OnTransportInfoByBtnClicked){listener = context}
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
        val view =inflater.inflate(R.layout.fragment_driver_buy_ticket, container, false)
+        transpInfoVM = this.activity?.let { ViewModelProviders.of(it).get(TranspInfoviewmodel::class.java) }!!
         startET = view.start_et
         destinationET = view.destination_et
         dateBtn = view.date_picker_btn
@@ -45,8 +58,19 @@ class DriverBuyTicket : Fragment() {
             //  Toast.makeText(activity,"date"+dateValue,Toast.LENGTH_LONG).show()
             setTime()
         }
+
+        buyBtn.setOnClickListener { buyTicket() }
         
         return view
+    }
+
+    fun buyTicket(){
+        // for now i used driver id statically
+        val transportInfo = TransportInfo(startET.text.toString(),destinationET.text.toString(),dateValue,timeValue,"id")
+        transpInfoVM.insertInfo(transportInfo)
+        Toast.makeText(activity,"TransportInfo added",Toast.LENGTH_LONG).show()
+        clearFields()
+        listener.onTransportInfoByBtnClicked()
     }
 
 
@@ -86,6 +110,17 @@ fun setDate(){
             )
         timePicker.show()
 
+    }
+    fun clearFields(){
+        startET.setText("")
+        destinationET.setText("")
+
+    }
+
+
+    interface OnTransportInfoByBtnClicked{
+        fun onTransportInfoByBtnClicked()
+        //fun onLogninButtonClicked(activeUser:String,userType:String)
     }
 
 

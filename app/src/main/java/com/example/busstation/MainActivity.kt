@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(),
     DriverProfile.OnDriverProfileButtonsClicked,
     DriverBasicInfo.OnDriverBasicInfoClicked,
     ConfirmBackAccount.OnConfirmAccountBtnClicked,
+    DriverBuyTicket.OnTransportInfoByBtnClicked,
     NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -162,6 +163,11 @@ class MainActivity : AppCompatActivity(),
 
     }
 
+    override fun onTransportInfoByBtnClicked() {
+
+//not implemnted yet
+    }
+
     fun replaceFragment(fragment: Fragment){
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             supportFragmentManager.beginTransaction()
@@ -192,6 +198,7 @@ class MainActivity : AppCompatActivity(),
 
 
     }
+
 
 
 
