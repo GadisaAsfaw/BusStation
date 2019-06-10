@@ -36,8 +36,8 @@
             android:ems="10"
             android:id="@+id/license_no_et"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.529" android:hint="ETR451" android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.314" android:hint="ETR451" android:layout_marginTop="44dp"
             app:layout_constraintTop_toBottomOf="@+id/textView14"/>
     <TextView
             android:text="Car VIN"
@@ -54,8 +54,8 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/car_vin_et" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline5" android:layout_marginLeft="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
             android:layout_marginTop="12dp" app:layout_constraintTop_toBottomOf="@+id/license_no_et"
             app:layout_constraintHorizontal_bias="0.111" android:hint="Oro 1344538974"/>
     <TextView
@@ -73,9 +73,10 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/car_side_no_et" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline5" android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/car_vin_et" android:hint="5581"/>
+            android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/car_vin_et" android:hint="5581"
+            app:layout_constraintHorizontal_bias="0.111"/>
     <TextView
             android:text="Seat No"
             android:layout_width="150dp"
@@ -91,10 +92,10 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/seat_no_et" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" android:layout_marginRight="16dp" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline5" android:layout_marginLeft="8dp"
+            android:layout_marginEnd="16dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/car_side_no_et"
-            app:layout_constraintHorizontal_bias="1.0" android:hint="12"/>
+            app:layout_constraintHorizontal_bias="0.157" android:hint="12"/>
     <TextView
             android:text="acc No"
             android:layout_width="150dp"
@@ -118,4 +119,12 @@
             android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/seat_no_et"
             app:layout_constraintHorizontal_bias="0.111" android:hint="100003454643" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0"/>
+    <Button
+            android:text="Add Info"
+            android:layout_width="324dp"
+            android:layout_height="63dp"
+            android:id="@+id/add_info_btn" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" android:layout_marginTop="16dp"
+            app:layout_constraintHorizontal_bias="0.383"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

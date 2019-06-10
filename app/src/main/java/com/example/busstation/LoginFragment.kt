@@ -23,14 +23,14 @@ class LoginFragment : Fragment() {
     private lateinit var userPasswordET:EditText
     private lateinit var signupTV:TextView
     private lateinit var loginBtn:Button
-    private  lateinit var  listener:OnSignupButtonClicked
+    private  lateinit var  listener:OnLoginFragBtnsClicked
     private lateinit var userVM:UserVM
 
 
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if(context is OnSignupButtonClicked){
+        if(context is OnLoginFragBtnsClicked){
             listener = context
         }
     }
@@ -56,7 +56,7 @@ class LoginFragment : Fragment() {
         return view
     }
 
-    interface OnSignupButtonClicked{
+    interface OnLoginFragBtnsClicked{
         fun onSignupButtonClicked()
         fun onLogninButtonClicked(activeUser:String,userType:String)
     }

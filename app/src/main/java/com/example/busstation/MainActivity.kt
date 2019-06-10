@@ -12,15 +12,19 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.busstation.data.User
 import com.example.busstation.viewmodel.UserVM
 
-class MainActivity : AppCompatActivity(),LoginFragment.OnSignupButtonClicked,
+class MainActivity : AppCompatActivity(),
+    LoginFragment.OnLoginFragBtnsClicked,
     UserRegistration.OnRegisterButtonClicked,
+    DriverProfile.OnDriverProfileButtonsClicked,
+    DriverBasicInfo.OnDriverBasicInfoClicked,
     NavigationView.OnNavigationItemSelectedListener {
+
+
     private  lateinit var  userVM:UserVM
 
 
@@ -33,11 +37,13 @@ class MainActivity : AppCompatActivity(),LoginFragment.OnSignupButtonClicked,
         ///-------------------------------/////////
         userVM = ViewModelProviders.of(this).get(UserVM::class.java)
         val loginFragment = LoginFragment()
-        if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+        replaceFragment(loginFragment)
+        /*if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frame,loginFragment)
                 .commit()
-       }
+       }*/
+
 
          ///////--------------------------------/////////////
         val fab: FloatingActionButton = findViewById(R.id.fab)
@@ -98,50 +104,51 @@ class MainActivity : AppCompatActivity(),LoginFragment.OnSignupButtonClicked,
         userVM.insertUser(user)
         // back to login
         val backtologin = LoginFragment()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frame, backtologin)
-            .commit()
+        replaceFragment(backtologin)
 
     }
 
     override fun onSignupButtonClicked() {
         val register = UserRegistration()
-
-        if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frame, register)
-                .commit()
-        }
+        replaceFragment(register)
 
     }
 
    override fun onLogninButtonClicked(activUser:String,userType:String) {
        if (userType == "driver"){
            val driverPro =  DriverProfile.getInstance(activUser)
-           if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-               supportFragmentManager.beginTransaction()
-                   .replace(R.id.main_frame, driverPro)
-                   .addToBackStack(null)
-                   .commit()
-
-           }
-
+         replaceFragment(driverPro)
    }
        else {
            val travellerPro = UserProfile.getInstance(activUser)
-           if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-               supportFragmentManager.beginTransaction()
-                   .replace(R.id.main_frame, travellerPro)
-                   .addToBackStack(null)
-                   .commit()
-
-           }
-
+          replaceFragment(travellerPro)
        }
-
-
+    }
+    ///////////////////////////////
+    override fun onBuyTicketBtnClicked() {
+        val buyTicket = DriverBuyTicket()
+        replaceFragment(buyTicket)
+    }
+    override fun onBasicInfoBtnclicked() {
+        val basicInfo = DriverBasicInfo()
+        replaceFragment(basicInfo)
+    }
+    override fun OnAddBasicInfoBtnClicked() {
+        val confBankAcc = ConfirmBackAccount()
+        replaceFragment(confBankAcc)
 
     }
+    fun replaceFragment(fragment: Fragment){
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_frame, fragment )
+                .addToBackStack(null)
+                .commit()
+
+        }
+
+    }
+
 
 
 
