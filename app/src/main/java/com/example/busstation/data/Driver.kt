@@ -3,6 +3,7 @@ package com.example.busstation.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "driver_table")
 data class Driver(
@@ -15,4 +16,4 @@ data class Driver(
     @ColumnInfo(name = "car_side_no") val carSideNo:Int,
     @ColumnInfo(name = "seat_no") val seatNo:Int,
     @ColumnInfo(name = "acc_no") val accNo:String //foreign
-)
+):Serializable

@@ -37,19 +37,15 @@ class DriverProfile : Fragment() {
         dBuyTicketBtn = view.d_buy_ticket_btn
         availableSeatBtn = view.available_seat_btn
         basicInfoBtn = view.basic_info_btn
-        basicInfoBtn.setOnClickListener {
-            listner.onBasicInfoBtnclicked()
-        }
-        dBuyTicketBtn.setOnClickListener {
-            listner.onBuyTicketBtnClicked()
-        }
-        availableSeatBtn.setOnClickListener {
-            Toast.makeText(activity,"0 seats are available",Toast.LENGTH_LONG).show()
-        }
-
         //
         val activeU = arguments?.getString("active") as String
         dUserNameTV.text = activeU
+        //
+        basicInfoBtn.setOnClickListener { listner.onBasicInfoBtnclicked(dUserNameTV.text.toString()) }
+        dBuyTicketBtn.setOnClickListener { listner.onBuyTicketBtnClicked() }
+        availableSeatBtn.setOnClickListener {
+            Toast.makeText(activity,"0 seats are available",Toast.LENGTH_LONG).show()
+        }
         return view
     }
 
@@ -65,7 +61,7 @@ class DriverProfile : Fragment() {
     }
     interface OnDriverProfileButtonsClicked{
         fun onBuyTicketBtnClicked()
-        fun onBasicInfoBtnclicked()
+        fun onBasicInfoBtnclicked(userName:String)
 
 
     }

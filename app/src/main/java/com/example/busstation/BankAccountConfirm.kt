@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.busstation.data.Driver
 
 
 class BankAccountConfirm : Fragment() {
@@ -17,6 +18,18 @@ class BankAccountConfirm : Fragment() {
         // Inflate the layout for this fragment
        val view = inflater.inflate(R.layout.fragment_bank_account_confirm, container, false)
         return view
+    }
+
+
+
+    companion object{
+        fun getInstance(driver:Driver):BankAccountConfirm{
+            val fragment = BankAccountConfirm()
+            val bundle = Bundle()
+            bundle.putSerializable("driver",driver)
+            fragment.arguments = bundle
+            return  fragment
+        }
     }
 
 

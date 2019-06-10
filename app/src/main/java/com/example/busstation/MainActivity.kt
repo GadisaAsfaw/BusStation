@@ -12,9 +12,15 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.busstation.data.BankAccount
+import com.example.busstation.data.Driver
 import com.example.busstation.data.User
+import com.example.busstation.viewmodel.AccountVM
+import com.example.busstation.viewmodel.DriverVM
 import com.example.busstation.viewmodel.UserVM
 
 class MainActivity : AppCompatActivity(),
@@ -22,10 +28,14 @@ class MainActivity : AppCompatActivity(),
     UserRegistration.OnRegisterButtonClicked,
     DriverProfile.OnDriverProfileButtonsClicked,
     DriverBasicInfo.OnDriverBasicInfoClicked,
+    ConfirmBackAccount.OnConfirmAccountBtnClicked,
     NavigationView.OnNavigationItemSelectedListener {
 
 
     private  lateinit var  userVM:UserVM
+    private  lateinit var  accountVM:AccountVM
+    private  lateinit var  driverVM:DriverVM
+    private lateinit var  mYdriver: Driver
 
 
 
@@ -36,6 +46,8 @@ class MainActivity : AppCompatActivity(),
         setSupportActionBar(toolbar)
         ///-------------------------------/////////
         userVM = ViewModelProviders.of(this).get(UserVM::class.java)
+        accountVM= ViewModelProviders.of(this).get(AccountVM::class.java)
+        driverVM= ViewModelProviders.of(this).get(DriverVM::class.java)
         val loginFragment = LoginFragment()
         replaceFragment(loginFragment)
         /*if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
@@ -129,15 +141,27 @@ class MainActivity : AppCompatActivity(),
         val buyTicket = DriverBuyTicket()
         replaceFragment(buyTicket)
     }
-    override fun onBasicInfoBtnclicked() {
-        val basicInfo = DriverBasicInfo()
+    override fun onBasicInfoBtnclicked(uname:String) {
+        val basicInfo = DriverBasicInfo.getInstance(uname)
         replaceFragment(basicInfo)
     }
-    override fun OnAddBasicInfoBtnClicked() {
+    override fun OnAddBasicInfoBtnClicked(driver:Driver) {
+        //for now we just added bank account info statically
+        // to preserve the logic of bank account confirmation
+        mYdriver = driver// do't update database until banck acc in confirmed
+
+        accountVM.insertAccount(BankAccount( driver.accNo,driver.password,500.toFloat()))
+
+        Toast.makeText(this,""+driver.accNo,Toast.LENGTH_LONG).show()
         val confBankAcc = ConfirmBackAccount()
         replaceFragment(confBankAcc)
 
     }
+    override fun onConfirmBtnClicked(accNo: String, accPassword: String) {
+        authenticateAcountAndUpdateAdd(accNo,accPassword)
+
+    }
+
     fun replaceFragment(fragment: Fragment){
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             supportFragmentManager.beginTransaction()
@@ -146,6 +170,26 @@ class MainActivity : AppCompatActivity(),
                 .commit()
 
         }
+
+    }
+    fun authenticateAcountAndUpdateAdd(accNo: String,accPassword: String){
+
+        accountVM.allAccount.observe(this, Observer {
+                a->a?.let {
+            for(i: BankAccount in a){
+                if(i.acc_number == accNo && i.password == accPassword){
+                    driverVM.insertDriver(mYdriver)
+                    Toast.makeText(this,"Still working hm!!!!!!"+i.balance+mYdriver.carSideNo,Toast.LENGTH_LONG).show()
+                    val driverProfile = DriverProfile.getInstance(mYdriver.userName)
+                    replaceFragment(driverProfile)
+
+                }
+
+
+            }
+        }
+        })
+
 
     }
 
