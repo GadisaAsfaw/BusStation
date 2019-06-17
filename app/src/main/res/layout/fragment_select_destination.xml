@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".SelectDestination">
+
+
+        <TextView
+                android:text="Start"
+                android:layout_width="180dp"
+                android:layout_height="55dp"
+                android:id="@+id/textView8"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8" android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="88dp"
+                app:layout_constraintHorizontal_bias="1.0" android:gravity="center" android:textSize="18sp"
+                android:textStyle="bold"/>
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/guideline8"
+                                                    app:layout_constraintGuide_begin="205dp"
+                                                    android:orientation="vertical"/>
+        <TextView
+                android:text="Destination"
+                android:layout_width="180dp"
+                android:layout_height="55dp"
+                android:id="@+id/textView9" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline8" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="88dp"
+                app:layout_constraintHorizontal_bias="0.0" android:gravity="center" android:textSize="18sp"
+                android:textStyle="bold"/>
+        <EditText
+                android:layout_width="180dp"
+                android:layout_height="55dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/start_pos_et" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8" android:layout_marginTop="36dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" app:layout_constraintHorizontal_bias="1.0"
+                android:hint="Hawasa"/>
+        <EditText
+                android:layout_width="180dp"
+                android:layout_height="55dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/destination_pos_et" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline8" android:layout_marginTop="36dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" app:layout_constraintHorizontal_bias="0.0"
+                android:hint="Jima"/>
+        <Button
+                android:text="Continue"
+                android:layout_width="230dp"
+                android:layout_height="55dp"
+                android:id="@+id/continue_btn" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintHorizontal_bias="0.496"
+                android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/start_pos_et"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.061"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

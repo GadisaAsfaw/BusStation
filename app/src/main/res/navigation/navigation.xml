@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
+            app:startDestination="@id/loginFragment">
+
+    <fragment android:id="@+id/loginFragment"
+              android:name="com.example.busstation.LoginFragment"
+              android:label="fragment_login"
+              tools:layout="@layout/fragment_login">
+
+        <action android:id="@+id/action_loginFragment_to_userRegistration"
+                app:destination="@id/userRegistration"/>
+        <action android:id="@+id/action_loginFragment_to_driverProfile"
+                app:destination="@id/driverProfile"/>
+        <action android:id="@+id/action_loginFragment_to_userProfile"
+                app:destination="@id/userProfile"/>
+    </fragment>
+    <fragment android:id="@+id/userRegistration"
+              android:name="com.example.busstation.UserRegistration"
+              android:label="fragment_user_registration"
+              tools:layout="@layout/fragment_user_registration"/>
+
+    <fragment android:id="@+id/driverProfile"
+              android:name="com.example.busstation.DriverProfile"
+              android:label="fragment_driver_profile"
+              tools:layout="@layout/fragment_driver_profile">
+        <action android:id="@+id/action_driverProfile_to_driverBasicInfo"
+                app:destination="@id/driverBasicInfo"/>
+        <action android:id="@+id/action_driverProfile_to_driverBuyTicket"
+                app:destination="@id/driverBuyTicket"/>
+        <argument android:name="username"
+                  app:argType="string"
+
+        />
+        <argument android:name="userid" app:argType="string"/>
+    </fragment>
+    <fragment android:id="@+id/userProfile"
+              android:name="com.example.busstation.UserProfile"
+              android:label="fragment_user_profile"
+              tools:layout="@layout/fragment_user_profile">
+        <argument android:name="username"
+                  app:argType="string"
+        />
+        <action android:id="@+id/action_userProfile_to_selectDestination" app:destination="@id/selectDestination"/>
+        <argument android:name="userid" app:argType="string"/>
+    </fragment>
+    <fragment android:id="@+id/driverBasicInfo"
+              android:name="com.example.busstation.DriverBasicInfo"
+              android:label="fragment_driver_basic_info"
+              tools:layout="@layout/fragment_driver_basic_info">
+        <action android:id="@+id/action_driverBasicInfo_to_confirmBackAccount"
+                app:destination="@id/confirmBackAccount"/>
+        <argument android:name="username"
+                  app:argType="string"/>
+    </fragment>
+    <fragment android:id="@+id/driverBuyTicket"
+              android:name="com.example.busstation.DriverBuyTicket"
+              android:label="fragment_driver_buy_ticket"
+              tools:layout="@layout/fragment_driver_buy_ticket">
+        <argument android:name="userid" app:argType="string"/>
+    </fragment>
+    <fragment android:id="@+id/confirmBackAccount"
+              android:name="com.example.busstation.ConfirmBackAccount"
+              android:label="fragment_confirm_back_account"
+              tools:layout="@layout/fragment_confirm_back_account">
+        <argument android:name="a" app:argType="string"/>
+        <argument android:name="b" app:argType="string"/>
+        <argument android:name="c" app:argType="string"/>
+        <argument android:name="d" app:argType="string"/>
+        <argument android:name="e" app:argType="string"/>
+        <argument android:name="i1" app:argType="integer"/>
+        <argument android:name="i2" app:argType="integer"/>
+        <argument android:name="f" app:argType="string"/>
+    </fragment>
+    <fragment android:id="@+id/selectDestination" android:name="com.example.busstation.SelectDestination"
+              android:label="fragment_select_destination" tools:layout="@layout/fragment_select_destination">
+        <action android:id="@+id/action_selectDestination_to_travellerBuyTicket"
+                app:destination="@id/travellerBuyTicket"/>
+        <argument android:name="userid"/>
+    </fragment>
+    <fragment android:id="@+id/travellerBuyTicket" android:name="com.example.busstation.TravellerBuyTicket"
+              android:label="fragment_traveller_buy_ticket" tools:layout="@layout/fragment_traveller_buy_ticket"/>
+</navigation>

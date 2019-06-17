@@ -13,8 +13,10 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.busstation.data.TransportInfo
+import com.example.busstation.databinding.FragmentDriverBuyTicketBinding
 import com.example.busstation.viewmodel.TranspInfoviewmodel
 import kotlinx.android.synthetic.main.fragment_driver_buy_ticket.view.*
 import java.text.SimpleDateFormat
@@ -22,60 +24,52 @@ import java.util.*
 
 
 class DriverBuyTicket : Fragment() {
-    private lateinit var startET:EditText
-    private lateinit var destinationET:EditText
-    private lateinit var dateBtn:Button
-    private lateinit var timeBtn: Button
-    private lateinit var buyBtn:Button
     private lateinit var dateValue:String
     private lateinit var timeValue:String
 
     private lateinit var transpInfoVM: TranspInfoviewmodel
-    private lateinit var listener:OnTransportInfoByBtnClicked
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if(context is OnTransportInfoByBtnClicked){listener = context}
-    }
+    private lateinit var activeUid:String
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-       val view =inflater.inflate(R.layout.fragment_driver_buy_ticket, container, false)
+        val binding:FragmentDriverBuyTicketBinding =
+            DataBindingUtil.inflate(inflater,R.layout.fragment_driver_buy_ticket,container,false)
         transpInfoVM = this.activity?.let { ViewModelProviders.of(it).get(TranspInfoviewmodel::class.java) }!!
-        startET = view.start_et
-        destinationET = view.destination_et
-        dateBtn = view.date_picker_btn
-        timeBtn = view.time_picker_btn
-        buyBtn = view.buy_btn
-        
-        dateBtn.setOnClickListener {  setDate()
+
+        activeUid = arguments?.getString("userid") as String
+        Toast.makeText(activity,"UID"+activeUid,Toast.LENGTH_LONG).show()
+
+        binding.datePickerBtn.setOnClickListener {  setDate()
            // Toast.makeText(activity,"date"+dateValue,Toast.LENGTH_LONG).show()
         }
-        timeBtn.setOnClickListener {
+        binding.timePickerBtn.setOnClickListener {
             //  Toast.makeText(activity,"date"+dateValue,Toast.LENGTH_LONG).show()
             setTime()
         }
 
-        buyBtn.setOnClickListener { buyTicket() }
+        binding.buyBtn.setOnClickListener { buyTicket(binding) }
         
-        return view
+        return binding.root
     }
 
-    fun buyTicket(){
+    fun buyTicket(binding: FragmentDriverBuyTicketBinding){
         // for now i used driver id statically
-        val transportInfo = TransportInfo(startET.text.toString(),destinationET.text.toString(),dateValue,timeValue,"id")
+        val transportInfo = TransportInfo(binding.startEt.text.toString(),
+                                          binding.destinationEt.text.toString(),
+                                           dateValue,timeValue,activeUid)
         transpInfoVM.insertInfo(transportInfo)
-        Toast.makeText(activity,"TransportInfo added",Toast.LENGTH_LONG).show()
-        clearFields()
-        listener.onTransportInfoByBtnClicked()
+        Toast.makeText(activity,"TransportInfo added"+dateValue+"----"+timeValue,Toast.LENGTH_LONG).show()
+        clearFields(binding)
     }
 
 
 fun setDate(){
-    val formate = SimpleDateFormat("dd MMM, YYYY",Locale.US)
+   // val formate = SimpleDateFormat("dd MM YYYY",Locale.US)//Month in number
+    val formate = SimpleDateFormat("dd MMM YYYY",Locale.US)
 
    val now = Calendar.getInstance()
     val datePicker = DatePickerDialog(activity,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
@@ -110,18 +104,15 @@ fun setDate(){
             )
         timePicker.show()
 
+
     }
-    fun clearFields(){
-        startET.setText("")
-        destinationET.setText("")
+    fun clearFields(binding: FragmentDriverBuyTicketBinding){
+        binding.startEt.setText("")
+        binding.destinationEt.setText("")
 
     }
 
 
-    interface OnTransportInfoByBtnClicked{
-        fun onTransportInfoByBtnClicked()
-        //fun onLogninButtonClicked(activeUser:String,userType:String)
-    }
 
 
 

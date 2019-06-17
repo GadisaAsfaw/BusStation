@@ -10,7 +10,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.example.busstation.data.BankAccount
 import com.example.busstation.data.Driver
+import com.example.busstation.databinding.FragmentConfirmBackAccountBinding
+import com.example.busstation.viewmodel.AccountVM
+import com.example.busstation.viewmodel.DriverVM
 
 import kotlinx.android.synthetic.main.fragment_confirm_back_account.view.*
 import kotlinx.android.synthetic.main.fragment_confirm_back_account.view.acc_confirm_btn
@@ -18,36 +25,56 @@ import kotlinx.android.synthetic.main.fragment_confirm_back_account.view.acc_pas
 
 
 class ConfirmBackAccount : Fragment() {
-   private lateinit var   confirmAccountNoET:EditText
-    private lateinit var  confirmAccountPwET:EditText
-    private lateinit var  confirmAcountBtn:Button
-    private lateinit var listner:OnConfirmAccountBtnClicked
+    private lateinit var  accountVM:AccountVM
+    private lateinit var driverVM:DriverVM
+    private lateinit var mYdriver:Driver
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if(context is OnConfirmAccountBtnClicked){listner = context}
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val  view =inflater.inflate(R.layout.fragment_confirm_back_account, container, false)
-        confirmAccountNoET = view.acc_conf_no_et
-        confirmAccountPwET = view.acc_password_et
-        confirmAcountBtn = view.acc_confirm_btn
+        val binding:FragmentConfirmBackAccountBinding =
+            DataBindingUtil.inflate(inflater,R.layout.fragment_confirm_back_account,container,false)
+        accountVM =this.activity?.let { ViewModelProviders.of(it).get(AccountVM::class.java) }!!
+        driverVM =this.activity?.let { ViewModelProviders.of(it).get(DriverVM::class.java) }!!
+        mYdriver = Driver(
+                arguments?.getString("a") as String,
+                arguments?.getString("b") as String,
+                arguments?.getString("c") as String,
+                arguments?.getString("d") as String,
+                arguments?.getString("e") as String,
+                arguments?.getInt("i1") as Int,
+                arguments?.getInt("i2") as Int,
+                arguments?.getString("f") as String
+        )
 
-        confirmAcountBtn.setOnClickListener {
-            listner.onConfirmBtnClicked(confirmAccountNoET.text.toString(),confirmAccountPwET.text.toString())
+        binding.accConfirmBtn.setOnClickListener {
+            authenticateAcountAndUpdateDriver(binding.accConfNoEt.text.toString(),binding.accPasswordEt.text.toString())
         }
 
 
-        return view
+        return binding.root
     }
 
-    interface OnConfirmAccountBtnClicked{
-        fun onConfirmBtnClicked(accNo:String,accPassword:String)
+
+    fun authenticateAcountAndUpdateDriver(accNo: String,accPassword: String){
+
+        accountVM.allAccount.observe(this, Observer {
+                a->a?.let {
+            for(i: BankAccount in a){
+                if(i.acc_number == accNo && i.password == accPassword){
+                    driverVM.insertDriver(mYdriver)
+                   Toast.makeText(activity,"Still working hm>>>!!!!!!"+i.balance+mYdriver.carSideNo,Toast.LENGTH_LONG).show()
+
+                }
+
+
+            }
+        }
+        })
+
+
     }
 
 

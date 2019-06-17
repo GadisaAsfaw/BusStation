@@ -10,61 +10,42 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_driver_profile.view.*
+import com.example.busstation.databinding.FragmentDriverProfileBinding
 
 
 class DriverProfile : Fragment() {
-    private lateinit var dUserNameTV:TextView
-    private lateinit var dBuyTicketBtn:Button
-    private lateinit var availableSeatBtn:Button
-    private lateinit var basicInfoBtn:Button
+    private lateinit var activeUid:String
 
-    private  lateinit var listner: OnDriverProfileButtonsClicked
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnDriverProfileButtonsClicked){
-            listner = context
-        }
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view =inflater.inflate(R.layout.fragment_driver_profile, container, false)
-        dUserNameTV = view.d_user_name_tv
-        dBuyTicketBtn = view.d_buy_ticket_btn
-        availableSeatBtn = view.available_seat_btn
-        basicInfoBtn = view.basic_info_btn
-        //
-        val activeU = arguments?.getString("active") as String
-        dUserNameTV.text = activeU
-        //
-        basicInfoBtn.setOnClickListener { listner.onBasicInfoBtnclicked(dUserNameTV.text.toString()) }
-        dBuyTicketBtn.setOnClickListener { listner.onBuyTicketBtnClicked() }
-        availableSeatBtn.setOnClickListener {
+        val binding:FragmentDriverProfileBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_driver_profile,container,false)
+
+        binding.activeUser = arguments?.getString("username") as String
+        activeUid = arguments?.getString("userid") as String
+
+        binding.basicInfoBtn.setOnClickListener {
+            val basicInfo =
+                DriverProfileDirections.actionDriverProfileToDriverBasicInfo(binding.dUserNameTv.text.toString())
+            Navigation.findNavController(binding.root).navigate(basicInfo)
+        }
+        binding.dBuyTicketBtn.setOnClickListener {
+            // Navigation.findNavController(binding.root).navigate(R.id.action_driverProfile_to_driverBuyTicket,null)
+           val driverBuyTicket = DriverProfileDirections.actionDriverProfileToDriverBuyTicket(activeUid)
+            Navigation.findNavController(binding.root).navigate(driverBuyTicket)
+        }
+        binding.availableSeatBtn.setOnClickListener {
             Toast.makeText(activity,"0 seats are available",Toast.LENGTH_LONG).show()
         }
-        return view
+        return binding.root
     }
 
 
-    companion object{
-        fun getInstance(username:String):DriverProfile{
-            val fragment = DriverProfile()
-            val bundle = Bundle()
-            bundle.putString("active",username)
-            fragment.arguments = bundle
-            return  fragment
-        }
-    }
-    interface OnDriverProfileButtonsClicked{
-        fun onBuyTicketBtnClicked()
-        fun onBasicInfoBtnclicked(userName:String)
 
-
-    }
 
 
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="200dp">
+
+    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                android:id="@+id/guideline9" app:layout_constraintGuide_begin="134dp"
+                                                android:orientation="vertical"/>
+    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                android:id="@+id/guideline10" app:layout_constraintGuide_begin="269dp"
+                                                android:orientation="vertical"/>
+    <ScrollView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            android:layout_marginEnd="8dp" android:id="@+id/first_sv"
+            app:layout_constraintHorizontal_bias="1.0">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical"/>
+    </ScrollView>
+    <ScrollView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline9" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline10" android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="1.0" android:id="@+id/second_sv">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical"/>
+    </ScrollView>
+    <TextView
+            android:text="Date"
+            android:layout_width="115dp"
+            android:layout_height="30dp"
+            android:id="@+id/textView30" app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="@+id/first_sv"
+            app:layout_constraintHorizontal_bias="0.0" android:textSize="18sp"
+            android:textStyle="bold"/>
+    <TextView
+            android:layout_width="115dp"
+            android:layout_height="30dp"
+            android:id="@+id/date_tv" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="@+id/first_sv"
+            android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" android:textSize="18sp" android:hint="3June2019"/>
+    <TextView
+            android:text="Time"
+            android:layout_width="115dp"
+            android:layout_height="30dp"
+            android:id="@+id/textView32" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/date_tv" android:textSize="18sp" android:textStyle="bold"/>
+    <TextView
+            android:layout_width="115dp"
+            android:layout_height="29dp"
+            android:id="@+id/time_tv" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@+id/date_tv" android:layout_marginTop="28dp"
+            android:textSize="18sp" android:hint="3:30pm"/>
+    <TextView
+            android:text="Seat No"
+            android:layout_width="115dp"
+            android:layout_height="30dp"
+            android:id="@+id/textView35" app:layout_constraintStart_toStartOf="@+id/guideline9"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline10"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="1.0" app:layout_constraintTop_toTopOf="@+id/second_sv"
+            android:textSize="18sp" android:textStyle="bold"/>
+    <TextView
+            android:layout_width="115dp"
+            android:layout_height="30dp"
+            android:id="@+id/seat_no_tv" app:layout_constraintEnd_toStartOf="@+id/guideline10"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline9"
+            android:layout_marginStart="8dp" app:layout_constraintTop_toBottomOf="@+id/textView35"
+            app:layout_constraintHorizontal_bias="1.0" android:textSize="18sp" android:hint="11"/>
+    <TextView
+            android:text="Side No"
+            android:layout_width="115dp"
+            android:layout_height="30dp"
+            android:id="@+id/textView37" app:layout_constraintEnd_toStartOf="@+id/guideline10"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline9"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/seat_no_tv" android:textSize="18sp" android:textStyle="bold"/>
+    <TextView
+            android:layout_width="115dp"
+            android:layout_height="30dp"
+            android:id="@+id/side_no_tv" app:layout_constraintStart_toStartOf="@+id/guideline9"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline10"
+            android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@+id/textView37" android:textSize="18sp" android:hint="342"/>
+    <Button
+            android:text="Buy"
+            android:layout_width="88dp"
+            android:layout_height="100dp"
+            android:id="@+id/t_buy_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/guideline10" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.069"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

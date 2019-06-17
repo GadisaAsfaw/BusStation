@@ -15,6 +15,7 @@ class TranspInfoviewmodel(application: Application):AndroidViewModel(application
     private val transInfoRepo:TranspInfoRepo
     val allTransInfo: LiveData<List<TransportInfo>>
 
+
     init {
         val transportInfoDao = MYDatabase.getDatabase(application).transportInfoDao()
         transInfoRepo = TranspInfoRepo(transportInfoDao)
@@ -29,5 +30,6 @@ class TranspInfoviewmodel(application: Application):AndroidViewModel(application
     fun deleteInfo(transportInfo: TransportInfo) = viewModelScope.launch (Dispatchers.IO){
         transInfoRepo.deleteInfo(transportInfo)
     }
+
 
 }
