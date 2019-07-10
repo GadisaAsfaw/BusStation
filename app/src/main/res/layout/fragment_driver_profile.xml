@@ -8,9 +8,60 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#fff"
             tools:context=".DriverProfile">
 
-
+        <!--
+                <TextView
+                        android:text="Welcome to our Service"
+                        android:layout_width="385dp"
+                        android:layout_height="55dp"
+                        android:id="@+id/textView12" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="84dp" app:layout_constraintHorizontal_bias="0.8" android:gravity="center"
+                        android:textSize="18sp"/>
+                <TextView
+                        android:text="@{activeUser}"
+                        android:layout_width="385dp"
+                        android:layout_height="55dp"
+                        android:id="@+id/d_user_name_tv" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/textView12"
+                        android:layout_marginTop="4dp" app:layout_constraintHorizontal_bias="0.8" android:gravity="center"
+                        android:hint="Driver Name"/>
+                <Button
+                        android:text="Buy Ticket"
+                        android:layout_width="385dp"
+                        android:layout_height="65dp"
+                        android:id="@+id/d_buy_ticket_btn" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintHorizontal_bias="0.8" android:layout_marginTop="28dp"
+                        app:layout_constraintTop_toBottomOf="@+id/d_user_name_tv"/>
+                <Button
+                        android:text="Available Seat"
+                        android:layout_width="385dp"
+                        android:layout_height="65dp"
+                        android:id="@+id/available_seat_btn" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/d_buy_ticket_btn" app:layout_constraintHorizontal_bias="0.8"
+                        android:layout_marginTop="8dp"/>
+                <Button
+                        android:text="Basic Info"
+                        android:layout_width="385dp"
+                        android:layout_height="65dp"
+                        android:id="@+id/basic_info_btn" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintHorizontal_bias="0.8" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/available_seat_btn"/>-->
         <TextView
                 android:text="Welcome to our Service"
                 android:layout_width="385dp"
@@ -32,34 +83,47 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView12"
                 android:layout_marginTop="4dp" app:layout_constraintHorizontal_bias="0.8" android:gravity="center"
                 android:hint="Driver Name"/>
-        <Button
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/d_buy_ticket_btn"
+                android:layout_width="156dp"
+                android:layout_height="58dp"
+                android:background="@android:color/holo_blue_dark"
                 android:text="Buy Ticket"
-                android:layout_width="385dp"
-                android:layout_height="65dp"
-                android:id="@+id/d_buy_ticket_btn" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintHorizontal_bias="0.8" android:layout_marginTop="28dp"
-                app:layout_constraintTop_toBottomOf="@+id/d_user_name_tv"/>
-        <Button
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/guideline8"
+                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="116dp"
+                android:layout_marginStart="116dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0" android:layout_marginBottom="380dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/available_seat_btn"
+                android:layout_width="156dp"
+                android:layout_height="58dp"
+                android:background="@android:color/holo_blue_dark"
                 android:text="Available Seat"
-                android:layout_width="385dp"
-                android:layout_height="65dp"
-                android:id="@+id/available_seat_btn" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/d_buy_ticket_btn" app:layout_constraintHorizontal_bias="0.8"
-                android:layout_marginTop="8dp"/>
-        <Button
-                android:text="Basic Info"
-                android:layout_width="385dp"
-                android:layout_height="65dp"
-                android:id="@+id/basic_info_btn" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintHorizontal_bias="0.8" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/available_seat_btn"/>
+                android:layout_marginStart="116dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginTop="54dp"
+                app:layout_constraintTop_toBottomOf="@+id/d_buy_ticket_btn"/>
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/basic_info_btn"
+                android:layout_width="156dp"
+                android:layout_height="58dp"
+                android:background="@android:color/holo_blue_dark"
+                android:text="Basic Info"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="116dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0" android:layout_marginBottom="144dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="67dp"
+                app:layout_constraintTop_toBottomOf="@+id/available_seat_btn" app:layout_constraintVertical_bias="1.0"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

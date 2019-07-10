@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.busstation.data.TransportInfo
 import com.example.busstation.databinding.FragmentDriverBuyTicketBinding
 import com.example.busstation.viewmodel.TranspInfoviewmodel
+import com.example.busstation.viewmodel2.TransportInfoViewModel
 import kotlinx.android.synthetic.main.fragment_driver_buy_ticket.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,6 +29,7 @@ class DriverBuyTicket : Fragment() {
     private lateinit var timeValue:String
 
     private lateinit var transpInfoVM: TranspInfoviewmodel
+    private lateinit var transportInfoViewModel:TransportInfoViewModel
 
     private lateinit var activeUid:String
 
@@ -39,6 +41,7 @@ class DriverBuyTicket : Fragment() {
         val binding:FragmentDriverBuyTicketBinding =
             DataBindingUtil.inflate(inflater,R.layout.fragment_driver_buy_ticket,container,false)
         transpInfoVM = this.activity?.let { ViewModelProviders.of(it).get(TranspInfoviewmodel::class.java) }!!
+        transportInfoViewModel= this.activity?.let { ViewModelProviders.of(it).get(TransportInfoViewModel::class.java) }!!
 
         activeUid = arguments?.getString("userid") as String
         Toast.makeText(activity,"UID"+activeUid,Toast.LENGTH_LONG).show()
@@ -51,7 +54,8 @@ class DriverBuyTicket : Fragment() {
             setTime()
         }
 
-        binding.buyBtn.setOnClickListener { buyTicket(binding) }
+       // binding.buyBtn.setOnClickListener { buyTicket(binding) }
+        binding.buyBtn.setOnClickListener { buyTicket2(binding) }
         
         return binding.root
     }
@@ -65,9 +69,20 @@ class DriverBuyTicket : Fragment() {
         Toast.makeText(activity,"TransportInfo added"+dateValue+"----"+timeValue,Toast.LENGTH_LONG).show()
         clearFields(binding)
     }
+    //Remote
+    fun buyTicket2(binding: FragmentDriverBuyTicketBinding){
+        // for now i used driver id statically
+        val transportInfo = com.example.busstation.data2.TransportInfo(binding.startEt.text.toString(),
+            binding.destinationEt.text.toString(),
+            dateValue,timeValue,activeUid)
+        transportInfoViewModel.let { tivm->tivm.insertInfo(transportInfo) }
+        Toast.makeText(activity,"TransportInfo addedRemotly",Toast.LENGTH_LONG).show()
+        clearFields(binding)
+    }
 
 
-fun setDate(){
+
+    fun setDate(){
    // val formate = SimpleDateFormat("dd MM YYYY",Locale.US)//Month in number
     val formate = SimpleDateFormat("dd MMM YYYY",Locale.US)
 

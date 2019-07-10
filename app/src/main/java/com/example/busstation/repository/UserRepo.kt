@@ -16,6 +16,10 @@ class UserRepo(private val userDao:UserDao) {
     fun updateUser(user: User){
         userDao.updateUser(user)
     }
-    //fun getUser(name:String):MutableLiveData<User> = userDao.getUser(name)
+    fun getOneUser(name:String,pw:String):LiveData<User> = userDao.getUser(name,pw)
     fun getAllUser():LiveData<List<User>> = userDao.getAllUser()
+
+    fun getUser(): User {
+        return userDao.getUser()
+    }
 }
