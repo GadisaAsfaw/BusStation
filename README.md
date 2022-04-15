@@ -1,5 +1,4 @@
-# BusStation
-android architecture and testing project with kotlin
-Group members:
-1-Gadisa Asfaw  ATR/4136/09
-2-Ibrahim Abas  ATR/0799/09
+# Android Kotlin
+
+Android architecture and testing project with kotlin
+
